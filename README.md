@@ -4,12 +4,33 @@ Application web complète de gestion de tâches (todos) déployable via Docker C
 
 ## Architecture
 
-L'application est composée de 4 services conteneurisés :
+![Schéma d'architecture](docs/architecture.svg)
 
-- **API** : Backend Node.js (Express + TypeScript + Prisma) exposant une API RESTful
-- **Database** : PostgreSQL 16 pour la persistance des données
-- **Frontend** : Interface React (TypeScript + Vite) avec design moderne
-- **Nginx** : Reverse proxy pour router les requêtes vers API et Frontend
+L'application est composée de 4 services conteneurisés orchestrés par Docker Compose :
+
+- **Nginx (Reverse Proxy)** : Point d'entrée unique sur le port 80, route les requêtes vers Frontend (statique) et API (/api/*)
+- **Frontend** : Interface React 18 + Vite avec TypeScript, servie par Nginx interne (port 80)
+- **API Backend** : Node.js 20 + Express + TypeScript + Prisma ORM, expose une API RESTful (port 3000)
+- **Database** : PostgreSQL 16 Alpine avec volume persistant pour les données
+
+### Flux de communication
+
+```
+Client Browser (HTTP:80)
+    ↓
+Nginx Reverse Proxy
+    ├─→ Frontend (Static files) → Network: frontend
+    └─→ API Backend (/api/*)    → Network: frontend
+            ↓
+        PostgreSQL Database     → Network: backend
+            ↓
+        Volume: postgres_data (persistance)
+```
+
+### Réseaux Docker
+
+- **frontend** : Communication entre Nginx ↔ Frontend ↔ API
+- **backend** : Communication sécurisée entre API ↔ Database
 
 ## Prérequis
 

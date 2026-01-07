@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .container { fill: #e3f2fd; stroke: #1976d2; stroke-width: 2; }
+      .database { fill: #fff3e0; stroke: #f57c00; stroke-width: 2; }
+      .proxy { fill: #f3e5f5; stroke: #7b1fa2; stroke-width: 2; }
+      .client { fill: #e8f5e9; stroke: #388e3c; stroke-width: 2; }
+      .network { fill: none; stroke: #424242; stroke-width: 1; stroke-dasharray: 5,5; }
+      .arrow { stroke: #424242; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .text { font-family: Arial, sans-serif; font-size: 14px; }
+      .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 12px; fill: #666; }
+      .port { font-family: monospace; font-size: 11px; fill: #1976d2; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#424242" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="450" y="30" class="title" text-anchor="middle">Architecture DevOps - Application Todos</text>
+  <text x="450" y="50" class="subtitle" text-anchor="middle">Docker Compose Multi-Container</text>
+  
+  <!-- Client Browser -->
+  <rect x="350" y="80" width="200" height="60" class="client" rx="5"/>
+  <text x="450" y="105" class="text" text-anchor="middle" font-weight="bold">🌐 Client (Browser)</text>
+  <text x="450" y="125" class="subtitle" text-anchor="middle">Interface utilisateur</text>
+  
+  <!-- Nginx Reverse Proxy -->
+  <rect x="330" y="180" width="240" height="80" class="proxy" rx="5"/>
+  <text x="450" y="205" class="text" text-anchor="middle" font-weight="bold">🔀 Nginx (Reverse Proxy)</text>
+  <text x="450" y="225" class="subtitle" text-anchor="middle">nginx:1.25-alpine</text>
+  <text x="450" y="245" class="port" text-anchor="middle">Port: 80 (Host) → 80 (Container)</text>
+  
+  <!-- Network Frontend -->
+  <rect x="100" y="300" width="700" height="240" class="network" rx="10"/>
+  <text x="450" y="325" class="subtitle" text-anchor="middle">🔗 Network: frontend</text>
+  
+  <!-- Frontend Container -->
+  <rect x="120" y="350" width="220" height="160" class="container" rx="5"/>
+  <text x="230" y="375" class="text" text-anchor="middle" font-weight="bold">⚛️ Frontend</text>
+  <text x="230" y="395" class="subtitle" text-anchor="middle">React 18 + Vite 5</text>
+  <text x="230" y="415" class="subtitle" text-anchor="middle">TypeScript</text>
+  <text x="230" y="435" class="subtitle" text-anchor="middle">Nginx static server</text>
+  <text x="230" y="455" class="port" text-anchor="middle">Port: 80</text>
+  <text x="230" y="475" class="subtitle" text-anchor="middle">Dark mode, Filters</text>
+  <text x="230" y="495" class="subtitle" text-anchor="middle">Categories, Priorities</text>
+  
+  <!-- API Container -->
+  <rect x="560" y="350" width="220" height="160" class="container" rx="5"/>
+  <text x="670" y="375" class="text" text-anchor="middle" font-weight="bold">🚀 API Backend</text>
+  <text x="670" y="395" class="subtitle" text-anchor="middle">Node.js 20 + Express</text>
+  <text x="670" y="415" class="subtitle" text-anchor="middle">TypeScript + Prisma ORM</text>
+  <text x="670" y="435" class="port" text-anchor="middle">Port: 3000</text>
+  <text x="670" y="455" class="subtitle" text-anchor="middle">RESTful API</text>
+  <text x="670" y="475" class="subtitle" text-anchor="middle">Filter, Search, Stats</text>
+  <text x="670" y="495" class="subtitle" text-anchor="middle">Bulk operations</text>
+  
+  <!-- Network Backend -->
+  <rect x="540" y="540" width="260" height="50" class="network" rx="5"/>
+  <text x="670" y="560" class="subtitle" text-anchor="middle">🔗 Network: backend</text>
+  <text x="670" y="578" class="subtitle" text-anchor="middle">(API ↔ Database)</text>
+  
+  <!-- Database Container -->
+  <rect x="380" y="540" width="140" height="50" class="database" rx="5"/>
+  <text x="450" y="560" class="text" text-anchor="middle" font-weight="bold">🗄️ PostgreSQL</text>
+  <text x="450" y="578" class="port" text-anchor="middle">Port: 5432</text>
+  
+  <!-- Arrows -->
+  <path d="M 450 140 L 450 180" class="arrow"/>
+  <path d="M 450 260 L 230 350" class="arrow"/>
+  <path d="M 450 260 L 670 350" class="arrow"/>
+  <path d="M 670 510 L 670 540" class="arrow"/>
+  <path d="M 560 420 L 520 570" class="arrow"/>
+  
+  <!-- Labels on arrows -->
+  <text x="460" y="165" class="subtitle">HTTP</text>
+  <text x="320" y="300" class="subtitle">Static files</text>
+  <text x="560" y="300" class="subtitle">API /api/*</text>
+  <text x="540" y="525" class="subtitle">Prisma</text>
+  
+  <!-- Volume indicator -->
+  <circle cx="380" cy="570" r="8" fill="#ff9800" stroke="#e65100" stroke-width="1"/>
+  <text x="330" y="560" class="subtitle">📦 Volume</text>
+  <text x="315" y="575" class="subtitle">postgres_data</text>
+</svg>

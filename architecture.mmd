@@ -1,0 +1,32 @@
+graph TB
+    subgraph "Réseau Frontend"
+        nginx[Nginx<br/>Reverse Proxy<br/>Port: 80]
+        front[Frontend<br/>React + Vite<br/>Nginx Alpine<br/>Port: 80]
+        api[API<br/>Node.js + Express<br/>TypeScript + Prisma<br/>Port: 3000]
+    end
+
+    subgraph "Réseau Backend"
+        api
+        db[(PostgreSQL 16<br/>Base de Données<br/>Port: 5432)]
+    end
+
+    subgraph "Volumes Persistants"
+        vol[postgres_data<br/>Volume Docker]
+    end
+
+    client[Client Web<br/>Navigateur] -->|HTTP :80| nginx
+    nginx -->|Proxy /api/*| api
+    nginx -->|Proxy /| front
+    api -->|SQL| db
+    db -.->|Persistance| vol
+
+    style nginx fill:#67c2ef
+    style front fill:#61dafb
+    style api fill:#68a063
+    style db fill:#336791
+    style vol fill:#ffa500
+    style client fill:#f0f0f0
+
+    classDef network fill:#e1f5ff,stroke:#0288d1,stroke-width:2px
+    class "Réseau Frontend" network
+    class "Réseau Backend" network
